@@ -1,3 +1,12 @@
+export interface PedagogicalMaterial {
+  id: string;
+  title: string;
+  fileType: 'pdf' | 'normativa' | 'manual' | 'guia';
+  sizeMb: number;
+  downloadUrl?: string;
+  uploadedAt: string;
+}
+
 export interface Lesson {
   id: string;
   title: string;
@@ -7,6 +16,7 @@ export interface Lesson {
   activeSecondsWatched: number;
   description: string;
   isLocked: boolean;
+  materials?: PedagogicalMaterial[];
 }
 
 export interface Module {
@@ -23,6 +33,11 @@ export interface Course {
   hours: number;
   modules: Module[];
   passingScorePercent: number; // Mínimo 75% o 80%
+  instructor?: {
+    name: string;
+    title: string;
+    rut: string;
+  };
 }
 
 export interface StudentProgress {

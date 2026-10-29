@@ -7,6 +7,11 @@ export const MOCK_COURSE: Course = {
   subtitle: 'Técnicas de primera intervención para brigadas industriales y cuarteles de emergencia',
   hours: 16,
   passingScorePercent: 80,
+  instructor: {
+    name: 'Comandante / Instructor Mayor',
+    title: 'Especialista en Incendios Industriales y Normativas NFPA',
+    rut: '12.450.889-1',
+  },
   modules: [
     {
       id: 'mod-1',
@@ -21,6 +26,24 @@ export const MOCK_COURSE: Course = {
           activeSecondsWatched: 0,
           description: 'Revisión físico-química de la pirólisis y mecanismos de transferencia de calor por radiación y convección.',
           isLocked: false,
+          materials: [
+            {
+              id: 'mat-1-1',
+              title: 'Guía Técnica: Fisiología de la Pirólisis en Hidrocarburos (PDF)',
+              fileType: 'pdf',
+              sizeMb: 2.4,
+              downloadUrl: '#',
+              uploadedAt: '28-10-2026',
+            },
+            {
+              id: 'mat-1-2',
+              title: 'Extracto Oficial NFPA 921 - Capítulo 5: Termodinámica (PDF)',
+              fileType: 'normativa',
+              sizeMb: 4.1,
+              downloadUrl: '#',
+              uploadedAt: '28-10-2026',
+            },
+          ],
         },
         {
           id: 'les-1-2',
@@ -31,6 +54,16 @@ export const MOCK_COURSE: Course = {
           activeSecondsWatched: 0,
           description: 'Identificación de signos precursores de inflamación súbita generalizada y ventilación táctica controlada.',
           isLocked: true,
+          materials: [
+            {
+              id: 'mat-1-3',
+              title: 'Protocolo Operativo de Ventilación Táctica Antideflagración (PDF)',
+              fileType: 'manual',
+              sizeMb: 1.8,
+              downloadUrl: '#',
+              uploadedAt: '28-10-2026',
+            },
+          ],
         },
       ],
     },
@@ -47,6 +80,16 @@ export const MOCK_COURSE: Course = {
           activeSecondsWatched: 0,
           description: 'Protocolo de chequeo de alta y baja presión, alarma audible y prueba de sellado hermético.',
           isLocked: true,
+          materials: [
+            {
+              id: 'mat-2-1',
+              title: 'Checklist Oficial de Pruebas de Hermeticidad ERA NFPA 1981',
+              fileType: 'guia',
+              sizeMb: 1.2,
+              downloadUrl: '#',
+              uploadedAt: '28-10-2026',
+            },
+          ],
         },
       ],
     },
