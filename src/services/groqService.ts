@@ -4,8 +4,9 @@ export interface ChatMessage {
 }
 
 export const GROQ_MODELS = [
-  { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B Versatile (Recomendado - Razonamiento Experto NFPA)' },
-  { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant (Ultra Rápido - 750 tokens/seg)' },
+  { id: 'openai/gpt-oss-120b', name: 'GPT-OSS 120B (Recomendado - Máximo Razonamiento NFPA & Táctica)' },
+  { id: 'openai/gpt-oss-20b', name: 'GPT-OSS 20B (Ultra Rápido - Gran Precisión Técnica)' },
+  { id: 'qwen/qwen3.8-27b', name: 'Qwen 3.8 27B (Excelente Desempeño en Español)' },
 ];
 
 export const SYSTEM_PROMPT_IGNEO = `Eres el Profesor Virtual y Tutor Pedagógico Especializado de OTEC Ígneo (Organismo Técnico de Capacitación de la Fundación Cuerpo de Bomberos de Viña del Mar - Concón), desarrollado por el equipo de ingeniería de UNIVERSO693 SpA.
@@ -43,7 +44,12 @@ export class GroqService {
   }
 
   static getModel(): string {
-    return localStorage.getItem(this.MODEL_KEY) || 'llama-3.3-70b-versatile';
+    const saved = localStorage.getItem(this.MODEL_KEY);
+    if (!saved || saved.includes('llama')) {
+      // Migrar automáticamente si estaba seleccionado el modelo antiguo
+      return 'openai/gpt-oss-120b';
+    }
+    return saved;
   }
 
   static setModel(model: string) {
@@ -118,12 +124,13 @@ export class GroqService {
 
           try {
             const parsed = JSON.parse(dataStr);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) {
-              onChunk(content);
+            const delta = parsed.choices?.[0]?.delta;
+            // Manejar tanto content como modelos con canal reasoning
+            if (delta?.content) {
+              onChunk(delta.content);
             }
           } catch (e) {
-            // Ignorar JSON parciales
+            // Ignorar fragmentos parciales que se completarán en el siguiente chunk
           }
         }
       }

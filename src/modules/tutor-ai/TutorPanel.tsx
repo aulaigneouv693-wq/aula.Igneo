@@ -33,7 +33,7 @@ export const TutorPanel: React.FC = () => {
   // Config Modal State
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const [groqKeyInput, setGroqKeyInput] = useState('');
-  const [selectedModel, setSelectedModel] = useState('llama-3.3-70b-versatile');
+  const [selectedModel, setSelectedModel] = useState('openai/gpt-oss-120b');
   const [hasApiKey, setHasApiKey] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
